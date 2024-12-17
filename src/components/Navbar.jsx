@@ -1,24 +1,23 @@
-import { IKImage } from "imagekitio-react";
-import {
-  Cross,
-  CrossIcon,
-  LogIn,
-  LogInIcon,
-  MenuIcon,
-  XIcon,
-} from "lucide-react";
+import { LogInIcon, MenuIcon, XIcon } from "lucide-react";
 import React, { useState } from "react";
 import Image from "./Image.jsx";
+import { Link } from "react-router-dom";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
 
 const Navbar = () => {
   const [open, setOpen] = useState(true);
   return (
     <div className="w-full h-16 md:h-20 flex items-center justify-between">
       {/* logo */}
-      <div className="flex items-center text-2xl font-bold gap-4">
+      <Link to={"/"} className="flex items-center text-2xl font-bold gap-4">
         <Image src={"/logo.png"} className={"w-8 h-8"} />
         <span>Habibi Blog</span>
-      </div>
+      </Link>
       {/*mobile view */}
       <div className="md:hidden">
         <div
@@ -37,28 +36,31 @@ const Navbar = () => {
             open ? "-right-[100vw]" : "-right-0"
           } `}
         >
-          <a href="">Home</a>
-          <a href="">Trending</a>
-          <a href="">Most Popular</a>
-          <a href="">About</a>
-          <a href="">
+          <Link to="">Home</Link>
+          <Link to="">Trending</Link>
+          <Link to="">Most Popular</Link>
+          <Link to="">About</Link>
+          <Link to="">
             <button className="py-2 px-4 rounded-3xl">
               <LogInIcon />
             </button>
-          </a>
+          </Link>
         </div>
       </div>
       {/* desktop view */}
       <div className="hidden md:flex gap-8 xl:gap-12 font-medium">
-        <a href="">Home</a>
-        <a href="">Trending</a>
-        <a href="">Most Popular</a>
-        <a href="">About</a>
-        <a href="">
-          <button className=" px-4 rounded-3xl">
-            <LogInIcon />
-          </button>
-        </a>
+        <Link to="">Home</Link>
+        <Link to="">Trending</Link>
+        <Link to="">Most Popular</Link>
+        <Link to="">About</Link>
+        <SignedOut>
+          <Link to={"/login"}>
+            <button className=" px-4 rounded-3xl">
+              <LogInIcon />
+            </button>
+          </Link>
+        </SignedOut>
+        <UserButton />
       </div>
     </div>
   );
