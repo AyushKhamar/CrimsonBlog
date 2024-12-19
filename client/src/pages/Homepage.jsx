@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import MainCategories from "../components/MainCategories.jsx";
 import FeaturedPosts from "../components/FeaturedPosts.jsx";
+import PostList from "../components/PostList.jsx";
 
 const Homepage = () => {
   return (
@@ -67,6 +68,10 @@ const Homepage = () => {
       {/* featured post */}
       <FeaturedPosts />
       {/* post list */}
+      <div>
+        <h1 className="my-8 text-2xl text-gray-600">Recent Posts</h1>
+        <PostList />
+      </div>
     </div>
   );
 };
