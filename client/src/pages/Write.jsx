@@ -1,7 +1,7 @@
 import { useAuth, useUser } from "@clerk/clerk-react";
 import "react-quill-new/dist/quill.snow.css";
 import ReactQuill from "react-quill-new";
-// import { useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -30,20 +30,20 @@ const Write = () => {
 
   const { getToken } = useAuth();
 
-  // const mutation = useMutation({
-  //   mutationFn: async (newPost) => {
-  //     const token = await getToken();
-  //     return axios.post(`${import.meta.env.VITE_API_URL}/posts`, newPost, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //   },
-  //   onSuccess: (res) => {
-  //     toast.success("Post has been created");
-  //     navigate(`/${res.data.slug}`);
-  //   },
-  // });
+  const mutation = useMutation({
+    mutationFn: async (newPost) => {
+      const token = await getToken();
+      return axios.post(`${import.meta.env.VITE_API_URL}/posts`, newPost, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    },
+    onSuccess: (res) => {
+      toast.success("Post has been created");
+      navigate(`/${res.data.slug}`);
+    },
+  });
 
   if (!isLoaded) {
     return <div className="">Loading...</div>;
@@ -125,10 +125,10 @@ const Write = () => {
           />
         </div>
         <button
-          // disabled={mutation.isPending || (0 < progress && progress < 100)}
+          disabled={mutation.isPending || (0 < progress && progress < 100)}
           className="bg-blue-800 text-white font-medium rounded-xl mt-4 p-2 w-36 disabled:bg-blue-400 disabled:cursor-not-allowed"
         >
-          {/* {mutation.isPending ? "Loading..." : "Send"} */}
+          {mutation.isPending ? "Loading..." : "Send"}
         </button>
         {"Progress:" + progress}
         {/* {mutation.isError && <span>{mutation.error.message}</span>} */}

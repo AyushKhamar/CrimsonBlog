@@ -1,16 +1,23 @@
 import { LogInIcon, MenuIcon, XIcon } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "./Image.jsx";
 import { Link } from "react-router-dom";
 import {
   SignedIn,
   SignedOut,
   SignInButton,
+  useAuth,
   UserButton,
 } from "@clerk/clerk-react";
 
 const Navbar = () => {
   const [open, setOpen] = useState(true);
+  const { getToken } = useAuth();
+  useEffect(() => {
+    getToken().then((token) => {
+      console.log(token);
+    });
+  }, []);
   return (
     <div className="w-full h-16 md:h-20 flex items-center justify-between">
       {/* logo */}

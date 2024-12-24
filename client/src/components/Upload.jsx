@@ -41,8 +41,8 @@ const Upload = ({ children, type, setProgress, setData }) => {
 
   return (
     <IKContext
-      publicKey={import.meta.env.VITE_IK_PUBLIC_KEY}
-      urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
+      publicKey={import.meta.env.VITE_IMAGEKIT_PUBLIC_KEY}
+      urlEndpoint={import.meta.env.VITE_IMAGEKIT_BASEURL}
       authenticator={authenticator}
     >
       <IKUpload
