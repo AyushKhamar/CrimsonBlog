@@ -84,7 +84,9 @@ export const getPosts = async (req, res) => {
 export const getPostById = async (req, res) => {
   try {
     const { slug } = req.params;
-    const post = await postModel.findById({ slug });
+    const post = await postModel
+      .findOne({ slug })
+      .populate("user", "username img");
     res.status(200).json({ success: true, content: post });
   } catch (error) {
     res
